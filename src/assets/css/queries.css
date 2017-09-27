@@ -16,7 +16,6 @@ CSS Queries
     nav ul li a { width: 100%; float: left; position: relative; padding: 25px 0; text-align: center; border-bottom: 1px dotted rgba(255, 255, 255, 0.2); margin: 0px; }
     nav ul li a.last { border-bottom: none; }
     nav ul li.dot { display: none; }
-    .responsive-logo { background: url(../img/main-logo.png) no-repeat center center; width: 94px; height: 85px; position: absolute; top: 30px; left: 10%; }
     .logo-1 { position: absolute; left: 50%; top: 50%; }
     .logo-holder { display: none; }
     .logo-2 { position: absolute; left: 50%; top: 50%; }

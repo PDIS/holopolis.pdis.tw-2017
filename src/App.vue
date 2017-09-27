@@ -1,17 +1,24 @@
 <template>
   <div id="app">
-    <h
+    <headmenu></headmenu>
     <router-view></router-view>
+    <foot></foot>
   </div>
 </template>
 
 <script>
+import headmenu from './components/header.vue'
+import foot from './components/footer.vue'
 export default {
-  name: 'app'
+  name: 'app',
+  components: {
+    headmenu,
+    foot
+  }
 }
 </script>
 
-<style>
+<!--<style>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -20,13 +27,12 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
-</style>
-
-<style src="./assets/css/style.css"></style>
+</style>-->
+<style src="./assets/vendor/bootstrap/css/bootstrap.min.css"></style>
+<style src="./assets/css/flexslider.css"></style>
 <style src="./assets/css/animate.css"></style>
-<!--<style src="./assets/css/bootstrap.min.css"></style>
-<style src="./assets/css/flexslider.css"></style>-->
-<!--<style src="./assets/css/queries.css"></style>-->
-<style src="./assets/css/reset.css"></style>
 <style src="./assets/css/small-business.css"></style>
-<!--<style src="./assets/css/webstyle.css"></style>-->
+<!--<style src="./assets/css/style.css"></style>
+<style src="./assets/css/queries.css"></style>
+<style src="./assets/css/reset.css"></style>
+<style src="./assets/css/webstyle.css"></style>-->

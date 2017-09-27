@@ -4,7 +4,7 @@
     <!-- Heading Row -->
     <div class="row my-4">
       <div class="col-lg-12">
-        <img class="img-fluid rounded" src="img/mitch-rosen-188054.jpg" alt="">
+        <img class="img-fluid rounded" src="../assets/img/mitch-rosen-188054.jpg" alt="">
       </div>
     </div>
     <div class="row">
@@ -127,7 +127,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<!--<style scoped>
 h1,
 h2 {
   font-weight: normal;
@@ -147,3 +147,4 @@ a {
   color: #42b983;
 }
 </style>
+-->
