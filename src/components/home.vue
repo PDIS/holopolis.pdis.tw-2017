@@ -7,25 +7,7 @@
         <img class="img-fluid rounded" src="../assets/img/mitch-rosen-188054.jpg" alt="">
       </div>
     </div>
-    <div class="row">
-      <!-- /.col-lg-8 -->
-      <div class="col-lg-12">
-
-        <h1>Reinventing Democracy through Civic Deliberation </h1>
-
-        <p>Deliberation —
-          <i>listening to each other deeply, thinking together and working out something that we can all live with</i> — is magical.</p>
-
-        <p>Taiwan has been experimenting with bringing citizens and government together in a civic deliberation process for crafting digital legislation. Our process, vTaiwan, brings people directly into governance and helps lawmakers implement decisions with a greater degree of legitimacy. We see our project as an adaptable and reproducible prototype for future democracy. </p>
-
-        <p>It is our priority to support all people in participating fully and freely. We have utilized the power of web and AI to provide full remote participation for large groups of participants, and we are now taking the platform to the next level by bringing participants into a shared reality environment. This virtual environment will welcome people with different learning inclinations to participate and contribute freely in the ways they are most comfortable. We believe that by using technology creatively humanity can facilitate deep and fair conversations, form collective consensus, and deliver solution we can all live with.</p>
-
-        <p>Our team consists of developers, designers and researchers who work together and share ideas and prototypes for reinventing democracy. Join us remotely or physically, all are welcome.</p>
-
-        <a class="btn btn-primary btn-lg" href="joinus.html">Join us!</a>
-      </div>
-      <!-- /.col-md-4 -->
-    </div>
+<description></description>
     <!-- /.row -->
 
     <!-- Call to Action Well -->
@@ -116,8 +98,12 @@
 </template>
 
 <script>
+import description from './description.vue'
 export default {
   name: 'hello',
+  components: {
+    description
+  },
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
