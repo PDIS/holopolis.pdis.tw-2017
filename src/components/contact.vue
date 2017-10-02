@@ -8,8 +8,7 @@
       </div>
       <!-- /.col-md-4 -->
       <div class="col-lg-8 ">
-        <p>Join our discussion and collaboration on Slack. </p>
-        <p> we are in #holopolis channel!</p>
+        <div v-html="contact"></div>
         <p>
           <a class="btn btn-large btn-primary" href="http://join.g0v.today/">Join us on Slack!</a>
         </p>
@@ -27,12 +26,19 @@
 
 
 <script>
+import axios from 'axios'
 export default {
   name: 'contact',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      contact: ''
     }
+  }
+  ,
+  created: function() {
+    axios.get('https://talk.pdis.nat.gov.tw/t/join-us/3957.json').then(res => {
+      this.contact = res.data.post_stream.posts[0].cooked
+    })
   }
 }
 </script>

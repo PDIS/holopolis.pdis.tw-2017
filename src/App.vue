@@ -32,7 +32,3 @@ export default {
 <style src="./assets/css/flexslider.css"></style>
 <style src="./assets/css/animate.css"></style>
 <style src="./assets/css/small-business.css"></style>
-<!--<style src="./assets/css/style.css"></style>
-<style src="./assets/css/queries.css"></style>
-<style src="./assets/css/reset.css"></style>
-<style src="./assets/css/webstyle.css"></style>-->
