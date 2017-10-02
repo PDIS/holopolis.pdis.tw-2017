@@ -46,25 +46,23 @@ export default {
   name: 'project',
   data() {
     return {
-      post: [] 
+      post: []
     }
   },
   created: function() {
     axios.get('https://talk.pdis.nat.gov.tw/c/holopolis/project.json').then(res => {
       let topics = res.data.topic_list.topics.map(topic => topic.id)
-      return topics.splice(1, 2)
-    }).then(topic => {
-      console.log(topic)
-      axios.get('https://talk.pdis.nat.gov.tw/t/' + topic + ".json").then(res => {
-        console.log(res)
-        let data = {}
-        data.title = res.data.title
-        data.content = res.data.post_stream.posts[0].cooked
-        data.link = res.data.post_stream.posts[0].link_counts[0].url
-        console.log(data)
-        this.post.push(data)
+      topics = topics.slice(1)
+      topics.map(topic => {
+        axios.get('https://talk.pdis.nat.gov.tw/t/' + topic + ".json").then(res => {
+          let data = {}
+          data.title = res.data.title
+          data.content = res.data.post_stream.posts[0].cooked
+          data.link = res.data.post_stream.posts[0].link_counts[0].url
+          this.post.push(data)
+        })
       })
-    })
+    }).then()
   }
 }
 </script>

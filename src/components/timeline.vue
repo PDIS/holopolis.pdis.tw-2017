@@ -10,7 +10,7 @@
         <h2>{{timeline.title}}</h2>
         <div v-html="timeline.content"></div>
         <a href="#0" class="cd-read-more">Read more</a>
-        <span class="cd-date">Jan 14</span>
+        <span class="cd-date">{{timeline.date}}</span>
       </div>
       <!-- cd-timeline-content -->
     </div>
@@ -37,15 +37,17 @@ export default {
   created: function() {
     axios.get('https://talk.pdis.nat.gov.tw/c/holopolis/timeline.json').then(res => {
       let topics = res.data.topic_list.topics.map(topic => topic.id)
+      topics = topics.slice(1)
       topics.map(topic => {
+        console.log(topics)
         if (topic != '3960') {
           axios.get('https://talk.pdis.nat.gov.tw/t/' + topic + ".json").then(res => {
             let timeline = {}
-            let data = res
             //console.log(data)
-            timeline.title = data.data.title
-            timeline.content = data.data.post_stream.posts[0].cooked
-            timeline.link = data.data.post_stream.posts[0].link_counts[0].url
+            timeline.title = res.data.title
+            timeline.content = res.data.post_stream.posts[0].cooked
+            timeline.link = res.data.post_stream.posts[0].link_counts[0].url
+            timeline.date = new Date(res.data.post_stream.posts[0]['created_at'].toString()).toISOString().substring(0, 10);
             this.timelines.push(timeline)
             console.log(this.timelines)
           })
