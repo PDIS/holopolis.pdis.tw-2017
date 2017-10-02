@@ -23,7 +23,8 @@
 
 <script>
 import jQuery from '../assets/vendor/jquery/jquery'
-import Popper from '../assets/vendor/popper/popper'
+//import Popper from '../assets/vendor/popper/popper's
+import Popper from 'popper.js'
 //import Bootstrap from '../assets/vendor/bootstrap/js/bootstrap'
 import main from '../assets/js/main'
 import axios from 'axios'

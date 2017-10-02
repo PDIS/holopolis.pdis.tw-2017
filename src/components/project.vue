@@ -57,7 +57,7 @@ export default {
         axios.get('https://talk.pdis.nat.gov.tw/t/' + topic + ".json").then(res => {
           let data = {}
           data.title = res.data.title
-          data.content = res.data.post_stream.posts[0].cooked
+          data.content = res.data.post_stream.posts[0].cooked.split()
           data.link = res.data.post_stream.posts[0].link_counts[0].url
           this.post.push(data)
         })
