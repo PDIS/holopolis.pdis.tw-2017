@@ -1,7 +1,7 @@
 <template>
   <footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+      <p class="m-0 text-center text-white">Made by PDIS</p>
     </div>
   </footer>
 </template>
