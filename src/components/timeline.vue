@@ -1,5 +1,5 @@
 <template>
-  <section id="cd-timeline" class="cd-container" >
+  <section id="cd-timeline" class="cd-container">
     <div class="cd-timeline-block" v-for="timeline in timelines">
       <div class="cd-timeline-img cd-picture">
         <img src="../assets/img/cd-icon-picture.svg" alt="Picture">
@@ -31,6 +31,35 @@ import axios from 'axios'
 export default {
   name: 'timeline',
   data() {
+    /*  async function gettopics() {
+       let response = await fetch('https://talk.pdis.nat.gov.tw/c/holopolis/timeline.json');
+       let data = await response.json();
+       let topics = data.topic_list.topics.map(topic => topic.id)
+       topics = topics.slice(1)
+       return topics
+     }
+ 
+     async function getcontent(topic) {
+       let response = await fetch('https://talk.pdis.nat.gov.tw/t/' + topic + '.json');
+       let data = await response.json();
+       return data
+       let timeline = {}
+       timeline.title = data.title
+       let ct = data.post_stream.posts[0].cooked.split('<hr>')
+       timeline.content = ct[0]
+       timeline.link = data.post_stream.posts[0].link_counts[0].url
+       timeline.date = new Date(data.post_stream.posts[0]['created_at'].toString()).toISOString().substring(0, 10);
+       return timeline
+       //console.log(this.timelines)
+       //this.timelines.push(timeline)
+     }
+     gettopics().then(topics => {
+       topics.map(topic => {
+         getcontent(topic).then(timeline => {
+           this.timelines.push(timeline)
+         })
+       })
+     }) */
     return {
       timelines: []
     }
@@ -43,13 +72,16 @@ export default {
         if (topic != '3960') {
           axios.get('https://talk.pdis.nat.gov.tw/t/' + topic + ".json").then(res => {
             let timeline = {}
-            //console.log(data)
+            timeline.id = res.data.id
             timeline.title = res.data.title
             let ct = res.data.post_stream.posts[0].cooked.split('<hr>')
             timeline.content = ct[0]
             timeline.link = res.data.post_stream.posts[0].link_counts[0].url
             timeline.date = new Date(res.data.post_stream.posts[0]['created_at'].toString()).toISOString().substring(0, 10);
             this.timelines.push(timeline)
+            this.timelines = this.timelines.sort(function(a,b) {
+              return b.id > a.id ? 1:-1
+            })
           })
         }
       })
