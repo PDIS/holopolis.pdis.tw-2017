@@ -1,6 +1,6 @@
 <template>
   <section id="cd-timeline" class="cd-container">
-    <div class="cd-timeline-block" v-for="timeline in timelines">
+    <div class="cd-timeline-block" v-for="timeline in timelines" v-bind:key="timeline.id">
       <div class="cd-timeline-img cd-picture">
         <img src="../assets/img/cd-icon-picture.svg" alt="Picture">
       </div>
