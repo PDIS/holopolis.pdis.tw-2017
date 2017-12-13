@@ -1,10 +1,11 @@
 <template>
   <div class="row">
-    <div class="col-md-4 mb-4" v-for="project in projects">
+    <div class="col-md-4 mb-4" v-for="project in projects" v-bind:key="project.id">
       <div class="card h-100">
         <div class="card-body">
           <h2 class="card-title">{{project.title}}</h2>
-          <p class="card-text"><div v-html="project.content"></div>
+          <img :src="project.img" width="305px" height="200px">
+          <p class="card-text" v-html="project.content"></p>
         </div>
         <div class="card-footer">
           <a v-bind:href="project.link" class="btn btn-primary">More Info</a>
@@ -30,9 +31,16 @@ export default {
       topics.map(topic => {
         axios.get('https://talk.pdis.nat.gov.tw/t/' + topic + ".json").then(res => {
           let project = {}
+          project.id = res.data.id
           project.title = res.data.title
-          project.content = res.data.post_stream.posts[0].cooked.split('<hr>')[0]
-          project.link = res.data.post_stream.posts[0].link_counts[0].url
+          project.content = res.data.post_stream.posts[0].cooked.split('<hr>')[1]
+          project.link = 'https://talk.pdis.nat.gov.tw/t/' + topic
+          if (res.data.post_stream.posts[0].link_counts == null || res.data.post_stream.posts[0].link_counts == 'undefined') {
+            project.img = ''
+          }
+          else {
+            project.img = res.data.post_stream.posts[0].link_counts[0].url
+          }
           this.projects.push(project)
         })
       })
