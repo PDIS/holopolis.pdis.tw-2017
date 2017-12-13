@@ -76,7 +76,12 @@ export default {
             timeline.title = res.data.title
             let ct = res.data.post_stream.posts[0].cooked.split('<hr>')
             timeline.content = ct[0]
-            timeline.link = res.data.post_stream.posts[0].link_counts[0].url
+            if (res.data.post_stream.posts[0].link_counts == null || res.data.post_stream.posts[0].link_counts == 'undefined') {
+              timeline.link = ''
+            } else {
+              timeline.link = res.data.post_stream.posts[0].link_counts[0].url
+            }
+            //timeline.link = res.data.post_stream.posts[0].link_counts[0].url
             timeline.date = new Date(res.data.post_stream.posts[0]['created_at'].toString()).toISOString().substring(0, 10);
             this.timelines.push(timeline)
             this.timelines = this.timelines.sort(function(a,b) {
