@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Holopolis - Civic Deliberation in Virtual Reality </title>
+
+    <!-- timeline CSS -->
+    <link href='http://fonts.googleapis.com/css?family=Droid+Serif|Open+Sans:400,700' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="css/reset.css"> <!--  CSS reset -->
+   <link rel="stylesheet" href="css/style.css"> <!--  Resource style -->
+    <script src="js/modernizr.js"></script> <!-- Modernizr -->
+    
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/small-business.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">Holopolis</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item ">
+              <a class="nav-link" href="index.html">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+        <!--     <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li> -->
+            <li class="nav-item active">
+              <a class="nav-link" href="timeline.html">Timeline</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="joinus.html">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+  <section id="cd-timeline" class="cd-container">
+      <div class="cd-timeline-block" v-for="timeline in timelines" v-bind:key="timeline.id">
+        <div :class="timeline.picclass">
+          <img :src="timeline.picture">
+        </div>
+        <!-- cd-timeline-img -->
+  
+        <div class="cd-timeline-content">
+          <h2>{{timeline.title}}</h2>
+          <div v-html="timeline.content"></div>
+          <a v-bind:href="timeline.link" class="cd-read-more">Read more</a>
+          <span class="cd-date">{{timeline.date}}</span>
+        </div>
+        <!-- cd-timeline-content -->
+      </div>
+      <!-- cd-timeline-block -->
+  
+      <!-- cd-timeline-block -->
+    </section>
+    <!-- cd-timeline -->
+    
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; PDIS 2017</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper/popper.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="js/main.js"></script> <!-- timeline jQuery -->
+    <script>
+        var timeline = new Vue({
+          el: '#cd-timeline',
+          data() {return {
+            timelines: []
+            }
+          },
+          created: function() {
+            axios.get('https://talk.pdis.nat.gov.tw/c/holopolis/timeline.json').then(res => {
+              let topics = res.data.topic_list.topics.map(topic => topic.id)
+              topics = topics.slice(1)
+              topics.map(topic => {
+                if (topic != '3960') {
+                  axios.get('https://talk.pdis.nat.gov.tw/t/' + topic + ".json").then(res => {
+                    let timeline = {}
+                    let pictype = ['cd-icon-picture','cd-icon-movie','cd-icon-location']
+                    let pics = ['img/cd-icon-picture.svg','img/cd-icon-movie.svg','img/cd-icon-location.svg']
+                    timeline.id = res.data.id
+                    timeline.title = res.data.title
+                    let ct = res.data.post_stream.posts[0].cooked.split('<hr>')
+                    timeline.content = ct[0]
+                    if (res.data.post_stream.posts[0].link_counts == null || res.data.post_stream.posts[0].link_counts == 'undefined') {
+                      timeline.link = ''
+                    } else {
+                      timeline.link = res.data.post_stream.posts[0].link_counts[0].url
+                    }
+                    //timeline.link = res.data.post_stream.posts[0].link_counts[0].url
+                    timeline.date = new Date(res.data.post_stream.posts[0]['created_at'].toString()).toISOString().substring(0, 10);
+                    timeline.pictype = pictype[Math.floor((Math.random() * 3))];
+                    timeline.picclass = "cd-timeline-img " + timeline.pictype.replace('-icon','');
+                    timeline.picture = 'img/' + timeline.pictype + '.svg'
+                    this.timelines.push(timeline)
+                    this.timelines = this.timelines.sort(function(a,b) {
+                      return b.id > a.id ? 1:-1
+                    })
+                  })
+                }
+              })
+            }).then(addanimation)
+          }
+        })
+      </script>
+  </body>
+
+</html>

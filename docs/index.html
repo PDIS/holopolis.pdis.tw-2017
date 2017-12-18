@@ -1,1 +1,192 @@
-<!DOCTYPE html><html><head><meta charset=utf-8><title>holopolis-vue</title><link href=static/css/app.181e67b13687a18060a8e42ba2573cf9.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=static/js/manifest.632eed4f43e6017a5301.js></script><script type=text/javascript src=static/js/vendor.8f0c50fa576fdecf61fe.js></script><script type=text/javascript src=static/js/app.48005beee758306b78e5.js></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Holopolis - Civic Deliberation in Virtual Reality </title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/flexslider.css?v=1.2" type="text/css">
+
+
+    <!-- Slides CSS -->
+    <link rel="stylesheet" href="css/flexslider.css" type="text/css">
+    <link rel="stylesheet" href="css/animate.css" type="text/css">
+  
+
+    <!-- Custom styles for this template -->
+    <link href="css/small-business.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Holopolis</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="timeline.html">Timeline</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="joinus.html">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+      <!-- Heading Row -->
+      <div class="row my-4">
+        <div class="col-lg-12">
+          <img class="img-fluid rounded" src="img/mitch-rosen-188054.jpg" alt="">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div id="description" v-html="post.content"></div>
+          <a class="btn btn-primary btn-lg" href="joinus.html">Join us!</a>
+        </div>
+      </div>
+
+      <!-- Flexisldies Well -->
+  
+      <div class="flexslider">
+        <ul class="slides">
+          <li>
+            <div class="card text-white bg-secondary my-4 text-center">
+              <div class="card-body">
+                <p class="m-0">When we see “internet of things”, let’s make it an internet of beings.<br>
+                When we see “virtual reality”, let’s make it a shared reality.<br>
+                When we see “machine learning”, let’s make it collaborative learning.<br>
+                When we see “user experience”, let’s make it about human experience.<br>
+                When we hear “the singularity is near”, let us remember: the Plurality is here.<br>
+                 - Audrey Tang
+                </p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="card text-white bg-secondary my-4 text-center">
+              <div class="card-body">
+                <p class="m-0">Machine learning can be used in representative democracy, <br>
+                  to bring more people's voice, <br>
+                  and more diversed voices in to our regulation and policy,<br>
+                   making policies more human,<br>
+                    because ther are instructed by a greater session of society.<br>
+                 - Colin Megill
+                </p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Content Row -->
+      <div class="row" id="project">
+        <div class="col-md-4 mb-4" v-for="project in projects" v-bind:key="project.id">
+          <div class="card h-100">
+            <div class="card-body">
+              <h2 class="card-title">{{project.title}}</h2>
+              <img :src="project.img" width="305px" height="200px">
+              <p class="card-text" v-html="project.content"></p>
+            </div>
+            <div class="card-footer">
+              <a v-bind:href="project.link" class="btn btn-primary">More Info</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; PDIS 2017</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper/popper.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="js/main.js"></script> <!-- Resource jQuery -->
+    <script src="js/jquery.flexslider.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="js/modernizr.js"></script>
+    <script src="js/waypoints.min.js"></script>
+
+    <script>
+      var description = new Vue({ 
+        el: '#description',
+        data () {
+          return {
+            post: { content: '' }
+          }
+        },
+        created: function () {
+          axios.get('https://talk.pdis.nat.gov.tw/t/description/3961.json').then(res => {
+            this.post.content = res.data.post_stream.posts[0].cooked
+          })
+        }
+      })
+
+      var project = new Vue({
+        el: '#project',
+        data() {
+          return {
+            projects: []
+          }
+        },
+        created: function() {
+          axios.get('https://talk.pdis.nat.gov.tw/c/holopolis/project.json').then(res => {
+            let topics = res.data.topic_list.topics.map(topic => topic.id)
+            topics = topics.slice(1)
+            topics.map(topic => {
+              axios.get('https://talk.pdis.nat.gov.tw/t/' + topic + ".json").then(res => {
+                let project = {}
+                project.id = res.data.id
+                project.title = res.data.title
+                project.content = res.data.post_stream.posts[0].cooked.split('<hr>')[1]
+                project.link = 'https://talk.pdis.nat.gov.tw/t/' + topic
+                if (res.data.post_stream.posts[0].link_counts == null || res.data.post_stream.posts[0].link_counts == 'undefined') {
+                  project.img = ''
+                }
+                else {
+                  project.img = res.data.post_stream.posts[0].link_counts[0].url
+                }
+                this.projects.push(project)
+              })
+            })
+          })
+        }
+      })
+    </script>
+  </body>
+
+</html>

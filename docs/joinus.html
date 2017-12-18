@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Holopolis - Civic Deliberation in Virtual Reality </title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/small-business.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">Holopolis</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item ">
+              <a class="nav-link" href="index.html">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+           <!--  <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li> -->
+            <li class="nav-item">
+              <a class="nav-link" href="timeline.html">Timeline</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    
+    <!-- Page Content -->
+    <div class="container">
+
+      <!-- Heading Row -->
+      <div class="row my-4">  
+        <div class="col-lg-2">
+          
+        </div>
+        <!-- /.col-md-4 -->
+        <div class="col-lg-8 ">
+            <div id="contact" v-html="contact"></div>
+            <p>
+              <a class="btn btn-large btn-primary" href="http://join.g0v.today/">Join us on Slack!</a>
+            </p>
+        </div>
+        <!-- /.col-lg-8 -->
+        <div class="col-lg-4">
+          
+        </div>
+        <!-- /.col-md-4 -->
+      </div>
+      <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+    
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; PDIS 2017</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+   
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper/popper.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="js/main.js"></script> <!-- Resource jQuery -->
+    <script>
+      var contact = new Vue({
+        el: '#contact',
+        data () {
+          return {
+            contact: ''
+          }
+        }
+        ,
+        created: function() {
+          axios.get('https://talk.pdis.nat.gov.tw/t/join-us/3957.json').then(res => {
+            this.contact = res.data.post_stream.posts[0].cooked
+          })
+        }
+      })
+    </script>
+  </body>
+
+</html>
