@@ -1,0 +1,21 @@
+{
+  "name": "holopolis.pdis.tw",
+  "description": "The code for the holopolis.pdis.tw website.",
+  "scripts": {
+  },
+  "env": {
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-static"
+    }
+  ]
+}
