@@ -71,7 +71,7 @@ The most accessible ways to get a change made is to reach out to us via:
 
 <!-- Links -->
    [forking]: https://guides.github.com/activities/forking/
-   [tech-used]: https://github.com/patcon/holopolis.pdis.tw/#technologies-used
+   [tech-used]: https://github.com/pdis/holopolis.pdis.tw/#technologies-used
    [audience-technical]: #contributing-via-github
    [audience-no-github]: #contributing-without-github
-   [new-issue]: https://github.com/patcon/holopolis.pdis.tw/issues/new
+   [new-issue]: https://github.com/pdis/holopolis.pdis.tw/issues/new
