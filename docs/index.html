@@ -105,11 +105,11 @@
 
       <!-- Content Row -->
       <div class="row" id="project">
-        <div class="col-md-4 mb-4" v-for="project in projects" v-bind:key="project.id">
-          <div class="card h-100">
+        <div class="card-deck mb-4">
+          <div class="card" v-for="project in projects" v-bind:key="project.id">
+            <h3 class="card-header">{{project.title}}</h4>
+            <img class="img-fluid" style="height: 15vw; object-fit: cover;" :src="project.img">
             <div class="card-body">
-              <h2 class="card-title">{{project.title}}</h2>
-              <img :src="project.img" width="305px" height="200px">
               <p class="card-text" v-html="project.content"></p>
             </div>
             <div class="card-footer">
