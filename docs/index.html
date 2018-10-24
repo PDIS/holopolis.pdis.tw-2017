@@ -184,7 +184,7 @@
                   project.img = ''
                 }
                 else {
-                  project.img = res.data.post_stream.posts[0].link_counts[0].url
+                  project.img = res.data.post_stream.posts[0].link_counts.filter(link => /\.(gif|jpe?g|png)$/.test(link.url))[0].url
                 }
                 this.projects.push(project)
               })
